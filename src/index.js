@@ -2,37 +2,17 @@
 'use strict'
 
 const request = require('request');
-var pollingtoevent = require('polling-to-event');
+const pollingtoevent = require('polling-to-event');
 
-
-let Service, Characteristic
+var Service, Characteristic
 
 module.exports = (homebridge) => {
   Service = homebridge.hap.Service
   Characteristic = homebridge.hap.Characteristic
-  homebridge.registerAccessory('homebridge-HTTP-Blynk-Dimmer', 'HTTP-Blynk-Dimmer', DimmerAccessory)
-//  homebridge.registerAccessory('homebridge-http-relay', 'HTTP-SWITCH', RelayAccessory)
+  homebridge.registerAccessory('homebridge-HTTP-Blynk-Dimmer', 'HTTP-Blynk-Dimmer', DimmerAccessory);
 }
 
 class DimmerAccessory{
-  httpRequest(url, body, method, callback) {
-    var callbackMethod = callback;
-
-    request({
-        url: url,
-        body: body,
-        method: this.httpMethod,
-        timeout: this.timeout,
-        rejectUnauthorized: false,
-        forever:true
-
-      },
-      function(error, response, responseBody) {
-        if (callbackMethod) {
-          callbackMethod(error, response, responseBody)
-        }
-      })
-  }
   constructor (log, config) {
     this.log = log
     this.config = config
@@ -144,7 +124,24 @@ class DimmerAccessory{
 
     }//end if status
   }//end constructer
+  httpRequest(url, body, method, callback) {
+    var callbackMethod = callback;
 
+    request({
+        url: url,
+        body: body,
+        method: this.httpMethod,
+        timeout: this.timeout,
+        rejectUnauthorized: false,
+        forever:true
+
+      },
+      function(error, response, responseBody) {
+        if (callbackMethod) {
+          callbackMethod(error, response, responseBody)
+        }
+      })
+  }
   getServices () {
     const informationService = new Service.AccessoryInformation()
         .setCharacteristic(Characteristic.Manufacturer, 'TRiCAM IOT')
@@ -156,21 +153,21 @@ class DimmerAccessory{
       .on('set', this.setOnCharacteristicHandler.bind(this))
 
     this.service.getCharacteristic(Characteristic.Brightness)
-      .on('get', this.getBrightness.bind(this))
+      //.on('get', this.getBrightness.bind(this))
       .on('set', this.setBrightness.bind(this));
 
     return [informationService, this.service]
   }
 
-  getBrightness (callback) {
-    request(`${this.getBrightnessUrl}`, (err, resp, body) => {
-      if(err){
-        this.log(err)
-      }
-      body=parseInt(body/10.24)
-      callback(null, parseInt(body))
-    })
-  }
+  // getBrightness (callback) {
+  //   request(`${this.getBrightnessUrl}`, (err, resp, body) => {
+  //     if(err){
+  //       this.log(err)
+  //     }
+  //     body=parseInt(body/10.24)
+  //     callback(null, body)
+  //   })
+  // }
 
   setBrightness (value, callback) {
     value = this.brightness = (value*10.24)

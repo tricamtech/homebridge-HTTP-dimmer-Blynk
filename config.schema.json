@@ -1,16 +1,44 @@
 {
-  "pluginAlias": "ExampleHomebridgePlugin",
-  "pluginType": "platform",
+  "pluginAlias": "HTTP-Blynk-Dimmer",
+  "pluginType": "accessory",
   "singular": true,
   "schema": {
     "type": "object",
     "properties": {
       "name": {
-        "title": "Name",
+        "title": "Device Name",
         "type": "string",
         "required": true,
-        "default": "Example Dynamic Platform"
-      }
+        "default": "Light"
+      },
+      "Blynk-Dimmer": {
+        "title": "TRiCAM Blynk-Dimmer Settings",
+        "type": "object",
+        "properties": {
+          "token": {
+            "title": "Device Token",
+            "type": "string",
+            "required": true
+          },
+          "serverApi": {
+            "title": "Server API URL",
+            "type": "string",
+            "required": true,
+            "default":"http://localhost:8080"
+          },
+          "pollingInterval": {
+            "title": "Polling Interval",
+            "type": "string",
+            "required": false
+            "default": "6000"
+          },
+          "timeout": {
+            "title": "timeout",
+            "type": "string",
+            "required": false
+            "default": "3000"
+          }
+        }
     }
   }
 }

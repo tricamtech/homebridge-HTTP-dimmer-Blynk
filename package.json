@@ -1,16 +1,16 @@
 {
   "private": true,
-  "displayName": "Plugin Name",
-  "name": "homebridge-plugin-name",
+  "displayName": "HTTP-Blynk-Dimmer",
+  "name": "homebridge-HTTP-Blynk-Dimmer",
   "version": "1.0.0",
-  "description": "A short description about what your plugin does.",
+  "description": "HTTP Dimmer with poling connected to Blynk server.",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/USERNAME/GITHUB_PROJECT_NAME.git"
+    "url": "git://github.com/TRiCAMTech/homebridge-HTTP-dimmer-Blynk.git"
   },
   "bugs": {
-    "url": "https://github.com/USERNAME/GITHUB_PROJECT_NAME/issues"
+    "url": "https://github.com/TRiCAMTech/homebridge-HTTP-dimmer-Blynk/issues"
   },
   "engines": {
     "node": ">=10.17.0",

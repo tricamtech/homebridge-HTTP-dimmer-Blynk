@@ -1,7 +1,7 @@
 {
-  "private": true,
+  "private": false,
   "displayName": "HTTP-Blynk-Dimmer",
-  "name": "homebridge-HTTP-Blynk-Dimmer",
+  "name": "homebridge-http-blynk-dimmer",
   "version": "1.0.0",
   "description": "HTTP Dimmer with poling connected to Blynk server.",
   "license": "Apache-2.0",
